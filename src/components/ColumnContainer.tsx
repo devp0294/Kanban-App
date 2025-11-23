@@ -15,7 +15,7 @@ interface Props {
   deleteTask: (id: string | number) => void;
   updateTask: (id: string | number, content: string) => void;
   tasks: Task[];
-  activeTask: Task | null;   // ★ required
+  activeTask: Task | null;
 }
 
 function ColumnContainer({
@@ -26,7 +26,7 @@ function ColumnContainer({
   deleteTask,
   updateTask,
   tasks,
-  activeTask,                // ★ required
+  activeTask,
 }: Props) {
   const [editMode, setEditMode] = useState(false);
   const [title, setTitle] = useState(column.title);
@@ -65,7 +65,7 @@ function ColumnContainer({
     if (e.key === "Escape") cancelEditing();
   }
 
-  function onMouseDownResize(e: React.MouseEvent) {
+  function onMouseDownResize(e: React.MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
     setResizing(true);
     document.body.style.cursor = "col-resize";
@@ -98,7 +98,7 @@ function ColumnContainer({
         ref={setNodeRef}
         style={style}
         className="bg-[#161c22] h-[500px] opacity-50 border-2 border-rose-500 rounded-md"
-      ></div>
+      />
     );
   }
 
@@ -112,12 +112,10 @@ function ColumnContainer({
         {...attributes}
         {...listeners}
         onDoubleClick={() => setEditMode(true)}
-        className="bg-[#0d1117] text-md h-[60px] cursor-grab rounded-md rounded-b-none 
-                   flex items-center justify-between p-3 font-bold border-b border-[#161c22] text-white"
+        className="bg-[#0d1117] h-[60px] cursor-grab flex items-center justify-between p-3 font-bold border-b border-[#161c22] text-white"
       >
         <div className="flex items-center gap-2">
           <div className="px-2 py-1 text-sm">{tasks.length}</div>
-
           {!editMode ? (
             <div>{title}</div>
           ) : (
@@ -142,21 +140,16 @@ function ColumnContainer({
 
       <div className="flex flex-col gap-2 grow text-white px-3 py-2 overflow-y-auto">
         <SortableContext items={tasks.map((t) => t.id)}>
-
-          {/* ★ HIDE TASK WHEN DRAGGING IT */}
           {tasks.map((task) =>
-            activeTask?.id === task.id
-              ? null
-              : (
-                  <Taskcard
-                    key={task.id}
-                    task={task}
-                    deleteTask={deleteTask}
-                    updateTask={updateTask}
-                  />
-                )
+            activeTask?.id === task.id ? null : (
+              <Taskcard
+                key={task.id}
+                task={task}
+                deleteTask={deleteTask}
+                updateTask={updateTask}
+              />
+            )
           )}
-
         </SortableContext>
       </div>
 

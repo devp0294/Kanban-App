@@ -1,13 +1,13 @@
 import { useState } from "react";
 import TrashIcon from "../icons/TrashIcon";
-import type { Id, Task } from "../types";
+import type { Task } from "../types";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 interface Props {
   task: Task;
-  deleteTask: (id: Id) => void;
-  updateTask: (id: Id, content: string) => void;
+  deleteTask: (id: Task["id"]) => void;
+  updateTask: (id: Task["id"], content: string) => void;
 }
 
 const Taskcard = ({ task, deleteTask, updateTask }: Props) => {
@@ -26,10 +26,7 @@ const Taskcard = ({ task, deleteTask, updateTask }: Props) => {
     transition,
   };
 
-  const startEdit = () => {
-    setIsEditing(true);
-  };
-
+  const startEdit = () => setIsEditing(true);
   const finishEdit = () => {
     setIsEditing(false);
     if (value.trim()) updateTask(task.id, value);
