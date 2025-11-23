@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TrashIcon from "../icons/TrashIcon";
 import type { Id, Task } from "../types";
 import { useSortable } from "@dnd-kit/sortable";
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Taskcard = ({ task, deleteTask, updateTask }: Props) => {
-  const [mouseIsOver, setMouseIsOver] = React.useState(false);
+  const [mouseIsOver, setMouseIsOver] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(task.content);
 
