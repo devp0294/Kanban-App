@@ -80,7 +80,6 @@ const KanbanBoard = () => {
     // TASK drag (can be within same column or across columns)
     if (activePayload.type === "task" && (overPayload.type === "task" || overPayload.type === "column")) {
       const draggedTask: Task = activePayload.task;
-      const sourceColumnId = draggedTask.columnId;
       const targetColumnId =
         overPayload.type === "column" ? overPayload.column.id : (overPayload.task as Task).columnId;
 
@@ -163,7 +162,7 @@ const KanbanBoard = () => {
   }
 
   return (
-    <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-[40px]">
+    <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-10">
       <DndContext
         sensors={sensors}
         onDragStart={handleDragStart}

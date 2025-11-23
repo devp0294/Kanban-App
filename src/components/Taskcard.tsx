@@ -15,7 +15,7 @@ const Taskcard = ({ task, deleteTask, updateTask }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(task.content);
 
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: task.id,
     data: { type: "task", task },
     disabled: isEditing,

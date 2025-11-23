@@ -140,7 +140,7 @@ function ColumnContainer({
         </button>
       </div>
 
-      <div className="flex flex-col gap-2 flex-grow text-white px-3 py-2 overflow-y-auto">
+      <div className="flex flex-col gap-2 grow text-white px-3 py-2 overflow-y-auto">
         <SortableContext items={tasks.map((t) => t.id)}>
 
           {/* ★ HIDE TASK WHEN DRAGGING IT */}
