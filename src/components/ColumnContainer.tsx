@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState, type KeyboardEvent } from "react";
 import type { Column, Task } from "../types";
 import TrashIcon from "../icons/TrashIcon";
 import { useSortable } from "@dnd-kit/sortable";
@@ -28,12 +28,12 @@ function ColumnContainer({
   tasks,
   activeTask,                // ★ required
 }: Props) {
-  const [editMode, setEditMode] = React.useState(false);
-  const [title, setTitle] = React.useState(column.title);
-  const [resizing, setResizing] = React.useState(false);
-  const [localWidth, setLocalWidth] = React.useState<number>(column.width ?? 350);
+  const [editMode, setEditMode] = useState(false);
+  const [title, setTitle] = useState(column.title);
+  const [resizing, setResizing] = useState(false);
+  const [localWidth, setLocalWidth] = useState<number>(column.width ?? 350);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setLocalWidth(column.width ?? 350);
   }, [column.width]);
 
@@ -60,7 +60,7 @@ function ColumnContainer({
     setEditMode(false);
   }
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") finishEditing();
     if (e.key === "Escape") cancelEditing();
   }
